@@ -6,14 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="m-gold-s.png" type="image/png">
     <title>Action Items</title>
-    <!-- Check if styles reset is required -->
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <div class="wrapper">
-            <h1>Action Items</h1>
-        </div>
-    <script src="blog.js"></script>
+  <div class="container">
+    <h1>Action Items List</h1>
+    <div class="new-item">
+      <input type="text" id="newItemInput" class="new-item-input" placeholder="Type a new item here and here">
+      <button id="newItemBtn" class="new-item-btn">Add</button>
+    </div>
+    <ul id="listContainer" class="display-items-list"></ul>
+
+    <!-- <ul class="display-items-list">
+      <li class="display-item-wrapper">
+        <input type="checkbox" name="" id="" class="item-checkbox">
+        <p class="display-item">
+          Dummy action item placeholder
+        </p>
+        <button class="item-hide-btn">Hide</button>
+      </li>
+      <li class="display-item-wrapper">
+        <input type="checkbox" name="" id="" class="item-checkbox">
+        <p class="display-item">
+          Dummy action item placeholder
+        </p>
+        <button class="item-hide-btn">Hide</button>
+      </li>
+      <li class="display-item-wrapper completed">
+        <input type="checkbox" checked name="" id="" class="item-checkbox">
+        <p class="display-item">
+          Dummy action item placeholder
+        </p>
+        <button class="item-hide-btn">Hide</button>
+      </li>
+    </ul> -->
+  </div>
+  
+<script src="action-items.js"></script>
 </body>
 </html>
