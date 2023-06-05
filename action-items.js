@@ -11,6 +11,9 @@ const newItemInputNode = document.getElementById('newItemInput');
 const newItemBtnNode = document.getElementById('newItemBtn');
 const listContainerNode = document.getElementById('listContainer');
 
+const trashSwitchNode = document.getElementById('trashSwitch');
+const trashContainerNode = document.getElementById('trashContainer');
+
 // Event listener for new item
 newItemBtnNode.addEventListener('click', function() {
   const itemFromUser = getItemFromUser();
@@ -35,7 +38,10 @@ newItemBtnNode.addEventListener('click', function() {
   newItemInputNode.value = '';
   renderActiveList();
   // renderList();
+});
 
+trashSwitchNode.addEventListener('click', function() {
+  renderTrashList();
 });
 
 // Get new item from user
@@ -95,6 +101,31 @@ function createListItem(item) {
   return listItem;
 }
 
+function createTrashItem(item) {
+  const trashItem = document.createElement('li');
+  if (item.completed) {
+    trashItem.className = 'display-item-wrapper completed';
+  } else {
+    trashItem.className = 'display-item-wrapper';
+  };
+
+  const label = document.createElement('label');
+  label.htmlFor = `checkbox_${item.id}`;
+  label.innerText = item.text;
+
+  const hideButton = document.createElement('button');
+  hideButton.className = 'item-hide-btn restore-btn';
+  hideButton.id = `btn_${item.id}`;
+  hideButton.innerText = 'restore';
+
+  trashItem.appendChild(label);
+  trashItem.appendChild(hideButton);
+
+  // for TBS:
+  console.log(trashItem);
+  return trashItem;
+}
+
 // for TBS:
 createListItem(actionItems[1]);
 
@@ -120,6 +151,24 @@ function renderActiveList() {
   const hideButtons = document.querySelectorAll('.item-hide-btn');
   hideButtons.forEach(button => {
     button.addEventListener('click', handleHideButtonClick);
+  });
+}
+
+function renderTrashList() {
+  // Clear existing list
+  trashContainerNode.innerHTML = '';
+
+  // Create list item and append list container
+  actionItems.forEach(item => {
+    if (item.hidden) {
+      const trashItem = createTrashItem(item);
+      trashContainerNode.appendChild(trashItem);
+    }
+  });
+
+  const restoreButtons = document.querySelectorAll('.restore-btn');
+  restoreButtons.forEach(button => {
+    button.addEventListener('click', handleRestoreButtonClick);
   });
 }
 
@@ -150,6 +199,21 @@ function handleHideButtonClick(event) {
     console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
   }
   renderActiveList();
+}
+
+function handleRestoreButtonClick(event) {
+  const button = event.target;
+  const itemId = parseInt(button.id.split('_')[1]);
+  
+  // Update hidden status for item with relevant id:
+  const item = actionItems.find(item => item.id === itemId);
+  if (item) {
+    item.hidden = false;
+    console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
+  }
+  trashContainerNode.innerHTML = '';
+  renderActiveList();
+  renderTrashList();
 }
 
 // Render the list
