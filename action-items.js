@@ -65,7 +65,11 @@ function generateUniqueId(arrayList) {
 // Create list item template for rendering
 function createListItem(item) {
   const listItem = document.createElement('li');
-  listItem.className = 'display-item-wrapper';
+  if (item.completed) {
+    listItem.className = 'display-item-wrapper completed';
+  } else {
+    listItem.className = 'display-item-wrapper';
+  };
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -119,28 +123,6 @@ function renderActiveList() {
   });
 }
 
-// function renderList() {
-//   // Clear existing list
-//   listContainerNode.innerHTML = '';
-
-//   // Create list item and append list container
-//   actionItems.forEach(item => {
-//     const listItem = createListItem(item);
-//     listContainerNode.appendChild(listItem);
-//   });
-
-//   // Set event listeners for checkboxes and btns
-//   const checkboxes = document.querySelectorAll('.item-checkbox');
-//   checkboxes.forEach(checkbox => {
-//     checkbox.addEventListener('change', handleCheckboxChange);
-//   });
-  
-//   const hideButtons = document.querySelectorAll('.item-hide-btn');
-//   hideButtons.forEach(button => {
-//     button.addEventListener('click', handleHideButtonClick);
-//   });
-// }
-
 // Event handler for checkbox change event
 function handleCheckboxChange(event) {
   const checkbox = event.target;
@@ -153,6 +135,7 @@ function handleCheckboxChange(event) {
     item.completed = checkbox.checked;
     console.log(`Action item ${itemId} status updated: ${item.completed}`);
   }
+  renderActiveList();
 }
 
 // Event handler for hide button click event
