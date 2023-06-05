@@ -33,7 +33,8 @@ newItemBtnNode.addEventListener('click', function() {
 
   // Clear input field
   newItemInputNode.value = '';
-  renderList();
+  renderActiveList();
+  // renderList();
 
 });
 
@@ -78,6 +79,7 @@ function createListItem(item) {
 
   const hideButton = document.createElement('button');
   hideButton.className = 'item-hide-btn';
+  hideButton.id = `btn_${item.id}`;
   hideButton.innerText = 'Hide';
 
   listItem.appendChild(checkbox);
@@ -93,14 +95,16 @@ function createListItem(item) {
 createListItem(actionItems[1]);
 
 // Render the list
-function renderList() {
+function renderActiveList() {
   // Clear existing list
   listContainerNode.innerHTML = '';
 
   // Create list item and append list container
   actionItems.forEach(item => {
-    const listItem = createListItem(item);
-    listContainerNode.appendChild(listItem);
+    if (!item.hidden) {
+      const listItem = createListItem(item);
+      listContainerNode.appendChild(listItem);
+    }
   });
 
   // Set event listeners for checkboxes and btns
@@ -114,6 +118,28 @@ function renderList() {
     button.addEventListener('click', handleHideButtonClick);
   });
 }
+
+// function renderList() {
+//   // Clear existing list
+//   listContainerNode.innerHTML = '';
+
+//   // Create list item and append list container
+//   actionItems.forEach(item => {
+//     const listItem = createListItem(item);
+//     listContainerNode.appendChild(listItem);
+//   });
+
+//   // Set event listeners for checkboxes and btns
+//   const checkboxes = document.querySelectorAll('.item-checkbox');
+//   checkboxes.forEach(checkbox => {
+//     checkbox.addEventListener('change', handleCheckboxChange);
+//   });
+  
+//   const hideButtons = document.querySelectorAll('.item-hide-btn');
+//   hideButtons.forEach(button => {
+//     button.addEventListener('click', handleHideButtonClick);
+//   });
+// }
 
 // Event handler for checkbox change event
 function handleCheckboxChange(event) {
@@ -132,19 +158,16 @@ function handleCheckboxChange(event) {
 // Event handler for hide button click event
 function handleHideButtonClick(event) {
   const button = event.target;
-  const listItem = button.parentElement;
-
-  // Remove affected action item from the data list
-  const itemId = parseInt(listItem.querySelector('.item-checkbox').id.split('_')[1]);
-  const itemIndex = actionItems.findIndex(item => item.id === itemId);
-  if (itemIndex !== -1) {
-    actionItems.splice(itemIndex,1);
-    console.log(`Action item ${itemId} removed from the list`);
+  const itemId = parseInt(button.id.split('_')[1]);
+  
+  // Update hidden status for item with relevant id:
+  const item = actionItems.find(item => item.id === itemId);
+  if (item) {
+    item.hidden = true;
+    console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
   }
-
-  // remove the list item
-  listItem.remove();
+  renderActiveList();
 }
 
 // Render the list
-renderList();
+renderActiveList();
