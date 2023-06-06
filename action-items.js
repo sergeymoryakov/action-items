@@ -125,8 +125,6 @@ function createTrashItem(item) {
   trashItem.appendChild(label);
   trashItem.appendChild(hideButton);
   
-  // for TBS:
-  // console.log(trashItem);
   return trashItem;
 }
 
@@ -134,18 +132,12 @@ function clearInputField() {
   return newItemInputNode.value = '';
 };
 
-// for TBS:
-// createListItem(actionItems[1]);
-
 function clearActiveList() {
   return listContainerNode.innerHTML = '';
 }
 
-
 // Render the list
 function renderActiveList() {
-  // Clear existing list
-  // listContainerNode.innerHTML = '';
   clearActiveList();
 
   // Create list item and append list container
@@ -173,8 +165,6 @@ function clearTrashList() {
 };
 
 function renderTrashList() {
-  // Clear existing list
-  // trashContainerNode.innerHTML = '';
   clearTrashList();
 
   // Create list item and append list container
@@ -235,10 +225,6 @@ function handleRestoreButtonClick(event) {
     item.hidden = false;
     console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
   }
-  // trashContainerNode.innerHTML = '';
   renderActiveList();
   renderTrashList();
 }
-
-// Render the list
-// renderActiveList();
