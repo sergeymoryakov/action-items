@@ -90,7 +90,7 @@ function createListItem(item) {
   const hideButton = document.createElement('button');
   hideButton.className = 'item-hide-btn';
   hideButton.id = `btn_${item.id}`;
-  hideButton.innerText = 'Hide';
+  hideButton.innerText = '';
 
   listItem.appendChild(checkbox);
   listItem.appendChild(label);
@@ -114,9 +114,9 @@ function createTrashItem(item) {
   label.innerText = item.text;
 
   const hideButton = document.createElement('button');
-  hideButton.className = 'item-hide-btn restore-btn';
+  hideButton.className = 'restore-btn';
   hideButton.id = `btn_${item.id}`;
-  hideButton.innerText = 'restore';
+  hideButton.innerText = '';
 
   trashItem.appendChild(label);
   trashItem.appendChild(hideButton);

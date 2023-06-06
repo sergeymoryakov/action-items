@@ -51,12 +51,11 @@ h1 {
 }
 
 .new-item-btn {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    color: var(--clr-almost-white);
-    background-color: var(--clr-enter);
-    border: 1px solid var(--clr-enter);
+    width: 2em;
+    height: 2em;
+    background-image: url(img_add_task.png);
+    background-size: contain;
+    border: 1px solid var(--clr-almost-black);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -89,9 +88,35 @@ h1 {
     text-decoration: line-through;
     opacity: 0.5;
 }
+.trash-switch {
+    width: 2em;
+    height: 2em;
+    background-image: url(img_delete.png);
+    background-size: contain;
+    /* border: none; */
+    border: 1px solid var(--clr-almost-black);
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.item-hide-btn {
+    width: 2em;
+    height: 2em;
+    background-image: url(img_close.png);
+    background-size: contain;
+    border: none;
+    /* border: 1px solid var(--clr-almost-black); */
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-/* Check before production: */
 .restore-btn {
-    background-color: red;
+    width: 2em;
+    height: 2em;
+    background-image: url(img_restore_from_trash.png);
+    background-size: contain;
+    border: none;
+    /* border: 1px solid var(--clr-almost-black); */
+    border-radius: 5px;
+    cursor: pointer;
 }
