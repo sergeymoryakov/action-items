@@ -17,14 +17,13 @@ const actionItems = [
   { id: 17, text: 'Buy food for a cat', completed: true, hidden: true }
 ];
 
-// const hiddenItems = [];
-
 const newItemInputNode = document.getElementById('newItemInput');
 const newItemBtnNode = document.getElementById('newItemBtn');
 const listContainerNode = document.getElementById('listContainer');
-
 const trashSwitchNode = document.getElementById('trashSwitch');
 const trashContainerNode = document.getElementById('trashContainer');
+
+renderActiveList();
 
 // Event listener for new item
 newItemBtnNode.addEventListener('click', function() {
@@ -34,22 +33,15 @@ newItemBtnNode.addEventListener('click', function() {
     return;
   }
 
-  // For TBS:
-  console.log(itemFromUser);
-
   // add new item to items list
   addItem(itemFromUser);
-
-  // For TBS:
-  console.log(actionItems);
   
   // add new item to rendering list
   createListItem(itemFromUser);
-
-  // Clear input field
-  newItemInputNode.value = '';
+  
+  clearInputField();
+  clearTrashList();
   renderActiveList();
-  // renderList();
 });
 
 trashSwitchNode.addEventListener('click', function() {
@@ -88,29 +80,27 @@ function createListItem(item) {
   } else {
     listItem.className = 'display-item-wrapper';
   };
-
+  
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
   checkbox.id = `checkbox_${item.id}`;
   checkbox.className = 'item-checkbox';
   checkbox.checked = item.completed;
-
+  
   const label = document.createElement('label');
   label.className = 'display-item';
   label.htmlFor = `checkbox_${item.id}`;
   label.innerText = item.text;
-
+  
   const hideButton = document.createElement('button');
   hideButton.className = 'item-hide-btn';
   hideButton.id = `btn_${item.id}`;
-  hideButton.innerText = '';
-
+  // hideButton.innerText = '';
+  
   listItem.appendChild(checkbox);
   listItem.appendChild(label);
   listItem.appendChild(hideButton);
-
-  // for TBS:
-  console.log(listItem);
+  
   return listItem;
 }
 
@@ -121,32 +111,42 @@ function createTrashItem(item) {
   } else {
     trashItem.className = 'display-item-wrapper';
   };
-
+  
   const label = document.createElement('label');
   label.className = 'display-item';
   label.htmlFor = `checkbox_${item.id}`;
   label.innerText = item.text;
-
+  
   const hideButton = document.createElement('button');
   hideButton.className = 'restore-btn';
   hideButton.id = `btn_${item.id}`;
-  hideButton.innerText = '';
-
+  // hideButton.innerText = '';
+  
   trashItem.appendChild(label);
   trashItem.appendChild(hideButton);
-
+  
   // for TBS:
-  console.log(trashItem);
+  // console.log(trashItem);
   return trashItem;
 }
 
+function clearInputField() {
+  return newItemInputNode.value = '';
+};
+
 // for TBS:
-createListItem(actionItems[1]);
+// createListItem(actionItems[1]);
+
+function clearActiveList() {
+  return listContainerNode.innerHTML = '';
+}
+
 
 // Render the list
 function renderActiveList() {
   // Clear existing list
-  listContainerNode.innerHTML = '';
+  // listContainerNode.innerHTML = '';
+  clearActiveList();
 
   // Create list item and append list container
   actionItems.forEach(item => {
@@ -168,9 +168,14 @@ function renderActiveList() {
   });
 }
 
+function clearTrashList() {
+  return trashContainerNode.innerHTML = '';
+};
+
 function renderTrashList() {
   // Clear existing list
-  trashContainerNode.innerHTML = '';
+  // trashContainerNode.innerHTML = '';
+  clearTrashList();
 
   // Create list item and append list container
   actionItems.forEach(item => {
@@ -205,6 +210,10 @@ function handleCheckboxChange(event) {
 function handleHideButtonClick(event) {
   const button = event.target;
   const itemId = parseInt(button.id.split('_')[1]);
+
+  if(!confirm('Please confirm moving item to trash bin')) {
+    return;
+  };
   
   // Update hidden status for item with relevant id:
   const item = actionItems.find(item => item.id === itemId);
@@ -213,6 +222,7 @@ function handleHideButtonClick(event) {
     console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
   }
   renderActiveList();
+  clearTrashList();
 }
 
 function handleRestoreButtonClick(event) {
@@ -225,10 +235,10 @@ function handleRestoreButtonClick(event) {
     item.hidden = false;
     console.log(`Action item ${itemId} hidden status updated: ${item.hidden}`);
   }
-  trashContainerNode.innerHTML = '';
+  // trashContainerNode.innerHTML = '';
   renderActiveList();
   renderTrashList();
 }
 
 // Render the list
-renderActiveList();
+// renderActiveList();
