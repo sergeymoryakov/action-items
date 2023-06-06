@@ -29,11 +29,12 @@ h1 {
     max-width: 600px;
     color: var(--clr-back);
     background-color: var(--clr-almost-white);
-    border: 1px solid var(--clr-alert);
+    border: 1px solid var(--clr-almost-white);
     border-radius: 10px;
 }
 
 .new-item {
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -55,6 +56,7 @@ h1 {
     height: 2em;
     background-image: url(img_add_task.png);
     background-size: contain;
+    background-color: transparent;
     border: 1px solid var(--clr-almost-black);
     border-radius: 5px;
     cursor: pointer;
@@ -65,38 +67,24 @@ h1 {
 }
 
 .display-item-wrapper {
+    margin-bottom: 3px;
+    height: 2.5em;
     display: flex;
-    margin: 5px 0;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
     border: 1px solid var(--clr-almost-black);
     border-radius: 5px;
 }
 
 .item-checkbox {
-    width: 24px;
-    border-radius: 12px;
+    width: 25px;
 }
 
 .display-item {
     display: block;
     width: 100%;
-    padding: 5px;
-}
-
-.completed {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
-.trash-switch {
-    width: 2em;
-    height: 2em;
-    background-image: url(img_delete.png);
-    background-size: contain;
-    /* border: none; */
-    border: 1px solid var(--clr-almost-black);
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 0 10px;
 }
 
 .item-hide-btn {
@@ -104,8 +92,26 @@ h1 {
     height: 2em;
     background-image: url(img_close.png);
     background-size: contain;
+    background-color: transparent;
     border: none;
-    /* border: 1px solid var(--clr-almost-black); */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.completed {
+    text-decoration: line-through;
+    background-color: var(--clr-light-gray);
+    opacity: 0.5;
+}
+.trash-switch {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 2em;
+    height: 2em;
+    background-image: url(img_delete.png);
+    background-size: contain;
+    background-color: transparent;
+    border: 1px solid var(--clr-almost-black);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -115,8 +121,8 @@ h1 {
     height: 2em;
     background-image: url(img_restore_from_trash.png);
     background-size: contain;
+    background-color: transparent;
     border: none;
-    /* border: 1px solid var(--clr-almost-black); */
     border-radius: 5px;
     cursor: pointer;
 }

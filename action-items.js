@@ -1,8 +1,20 @@
 const actionItems = [
-  { id: 1, text: 'Action item placeholder one', completed: false, hidden: false },
-  { id: 2, text: 'Action item placeholder two', completed: false, hidden: false },
-  { id: 3, text: 'Action item placeholder three', completed: false, hidden: false },
-  { id: 4, text: 'Action item placeholder four', completed: false, hidden: false }
+  { id: 1, text: 'Listen WK25 SD.CODE training lessons', completed: true, hidden: false },
+  { id: 2, text: 'Complete WK25 SD.CODE project', completed: false, hidden: false },
+  { id: 3, text: 'Pay apartment rental fee', completed: true, hidden: true },
+  { id: 4, text: 'Pay electicity bill', completed: true, hidden: true },
+  { id: 5, text: 'Pay gas bill', completed: false, hidden: false },
+  { id: 6, text: 'Pay internet bill', completed: false, hidden: false },
+  { id: 7, text: 'Pay appartment insurance for 2Q', completed: false, hidden: false },
+  { id: 8, text: 'Send invites for the mid-summer party', completed: true, hidden: false },
+  { id: 9, text: 'Buy drinks for the party', completed: false, hidden: false },
+  { id: 10, text: 'Apply for job at Google', completed: false, hidden: false },
+  { id: 11, text: 'Apply for job at Amazon', completed: true, hidden: false },
+  { id: 12, text: 'Apply for job at Avito', completed: false, hidden: false },
+  { id: 13, text: 'Apply for job at Google', completed: true, hidden: false },
+  { id: 14, text: 'Send brother a HB card', completed: true, hidden: true },
+  { id: 16, text: 'Pay back to the bank', completed: true, hidden: true },
+  { id: 17, text: 'Buy food for a cat', completed: true, hidden: true }
 ];
 
 // const hiddenItems = [];
@@ -84,6 +96,7 @@ function createListItem(item) {
   checkbox.checked = item.completed;
 
   const label = document.createElement('label');
+  label.className = 'display-item';
   label.htmlFor = `checkbox_${item.id}`;
   label.innerText = item.text;
 
@@ -110,6 +123,7 @@ function createTrashItem(item) {
   };
 
   const label = document.createElement('label');
+  label.className = 'display-item';
   label.htmlFor = `checkbox_${item.id}`;
   label.innerText = item.text;
 
